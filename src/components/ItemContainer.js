@@ -1,11 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { buyCake } from '../store/cakes/cakesActions'
+import { buyIceCream } from '../store/iceCreams/iceCreamsActions'
 
 function ItemContainer(props) {
 	return (
 		<div>
 			<h2>Item - {props.item} </h2>
+			<button onClick={props.buyItem}>Buy Items</button>
 		</div>
 	)
 }
@@ -17,9 +19,11 @@ const mapStateToProps = (state, ownProps) => {
 	}
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
+	const dispatchFunc = ownProps.cake ? () => dispatch(buyCake()) : () => dispatch(buyIceCream())
+
 	return {
-		buyCake: () => dispatch(buyCake())
+		buyItem: dispatchFunc
 	}
 }
 
