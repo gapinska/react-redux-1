@@ -1,3 +1,4 @@
+import axios from 'axios'
 const FETCH_USERS_REQUEST = 'FETCH_USERS_REQUEST'
 const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS'
 const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE'
@@ -51,6 +52,22 @@ const userReducer = (state = initialState, action) => {
 			}
 		default:
 			return state
+	}
+}
+
+export const fetchUsers = () => {
+	return (dispatch) => {
+		dispatch(fetchUsersRequest)
+		axios
+			.get('https://jsonplaceholder.typicode.com/users')
+			.then((response) => {
+				const users = response.data
+				dispatch(fetchUsersSuccess(users))
+			})
+			.catch((error) => {
+				const errorMsg = error.message
+				dispatch(fetchUsersFailure(errorMsg))
+			})
 	}
 }
 
