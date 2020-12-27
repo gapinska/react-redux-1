@@ -7,7 +7,7 @@ export const buyIceCream = () => {
 }
 
 const initialState = {
-	numOfIceCreams: 10
+	numOfIceCreams: 20
 }
 
 const iceCreamReducer = (state = initialState, action) => {
